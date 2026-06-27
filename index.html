@@ -405,6 +405,22 @@ html:has(.mask.on),body:has(.mask.on),html:has(#viewer.on),body:has(#viewer.on){
 @keyframes vtOut{ to{opacity:0;transform:translateY(-10px) scale(.97);} }
 @keyframes vtIn{ from{opacity:0;transform:translateY(16px) scale(1.02);} }
 @media (prefers-reduced-motion: reduce){ ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important;} }
+
+/* 起動時の軽量スケルトン: render() 完了で実カードに差し替わる。
+   行高はカードと揃えてレイアウトシフト防止・transform/opacity のみ・大人可愛いの丸み/ピンクに合わせる */
+.sk-list{display:flex;flex-direction:column;gap:14px;}
+.sk-card{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:12px;min-height:78px;align-items:center;}
+.sk-thumb{width:54px;height:54px;border-radius:6px;flex-shrink:0;}
+.sk-lines{flex:1;display:flex;flex-direction:column;gap:8px;}
+.sk-bar{height:12px;border-radius:999px;}
+.sk-bar.w40{width:40%;}.sk-bar.w70{width:70%;height:16px;}.sk-bar.w30{width:30%;}
+.sk-thumb,.sk-bar{background:linear-gradient(100deg,var(--line-2) 30%,var(--line) 50%,var(--line-2) 70%);
+  background-size:200% 100%;animation:skShimmer 1.2s ease-in-out infinite;}
+@keyframes skShimmer{from{background-position:200% 0;}to{background-position:-200% 0;}}
+@media (prefers-reduced-motion: reduce){
+  .sk-thumb,.sk-bar{animation:none;background:var(--line-2);}
+}
 </style>
 </head>
 <body>
@@ -444,7 +460,11 @@ html:has(.mask.on),body:has(.mask.on),html:has(#viewer.on),body:has(#viewer.on){
   <div class="filters" id="filters"></div>
   <div class="filters" id="tagFilters"></div>
 
-  <div class="list" id="list"></div>
+  <div class="list" id="list"><div class="sk-list" id="skList" aria-hidden="true">
+    <div class="sk-card"><div class="sk-thumb"></div><div class="sk-lines"><div class="sk-bar w40"></div><div class="sk-bar w70"></div><div class="sk-bar w30"></div></div></div>
+    <div class="sk-card"><div class="sk-thumb"></div><div class="sk-lines"><div class="sk-bar w40"></div><div class="sk-bar w70"></div><div class="sk-bar w30"></div></div></div>
+    <div class="sk-card"><div class="sk-thumb"></div><div class="sk-lines"><div class="sk-bar w40"></div><div class="sk-bar w70"></div><div class="sk-bar w30"></div></div></div>
+  </div></div>
   <div class="empty hidden" id="empty">
     <div class="e">カフェ日記</div>
     <div class="t">まだ記録がないよ</div>
@@ -724,7 +744,7 @@ function photoCell(r,cls){
 }
 
 // ===== 描画 =====
-function starHTML(n){let s='';for(let i=1;i<=5;i++)s+=`<span class="${i<=n?'':'off'}">★</span>`;return `<span class="stars">${s}</span>`}
+function starHTML(n){let s='';for(let i=1;i<=5;i++)s+=`<span class="${i<=n?'':'off'}">${i<=n?'★':'☆'}</span>`;return `<span class="stars" aria-label="${n}/5">${s}</span>`}
 
 function render(){
   $('st-count').textContent=records.length
@@ -747,7 +767,7 @@ function render(){
 
   const present=[...new Set(records.map(r=>r.type).filter(Boolean))]
   const fopts=['すべて',...present]
-  $('filters').innerHTML=fopts.map(f=>`<div class="fchip ${f===filter?'on':''}" data-f="${f}" role="button" tabindex="0" aria-pressed="${f===filter}">${f}</div>`).join('')
+  $('filters').innerHTML=fopts.map(f=>`<div class="fchip ${f===filter?'on':''}" data-f="${esc(f)}" role="button" tabindex="0" aria-pressed="${f===filter}">${esc(f)}</div>`).join('')
   $('filters').querySelectorAll('.fchip').forEach(el=>el.onclick=()=>{filter=el.dataset.f;withVT(()=>render())})
 
   // タグの絞り込み行
@@ -931,7 +951,7 @@ function renderTagChips(){
 
 // ===== 種類グリッド =====
 $('typeGrid').setAttribute('role','radiogroup')
-$('typeGrid').innerHTML=TYPES.map((t,i)=>`<div class="type-opt" role="radio" aria-checked="false" tabindex="${i===0?0:-1}" data-t="${t}">${t}</div>`).join('')
+$('typeGrid').innerHTML=TYPES.map((t,i)=>`<div class="type-opt" role="radio" aria-checked="false" tabindex="${i===0?0:-1}" data-t="${esc(t)}">${esc(t)}</div>`).join('')
 // 選択を集約（クリックもキーボードも同じここを呼ぶ＝ロジック二重化しない）
 function setType(t){
   formType=t

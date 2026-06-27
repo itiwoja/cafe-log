@@ -263,7 +263,7 @@ function render(){
     html+=`<div class="hall">${hall.map((r,i)=>`
       <div class="hall-item">
         <div class="hall-rank">${i+1}</div>
-        <div class="hall-photo" ${(r.photo||r.hasPhoto)?`data-pid="${r.id}"`:''}>${r.photo?`<img src="${r.photo}">`:(r.hasPhoto?'':'麺')}</div>
+        <div class="hall-photo" ${(r.photo||r.hasPhoto)?`data-pid="${r.id}"`:''}>${r.photo?`<img src="${r.photo}">`:(r.hasPhoto?'':'珈')}</div>
         <div class="hall-body">
           <div class="hall-menu">${esc(r.menu)||'（無題）'}</div>
           <div class="hall-shop">${esc(r.shop)||'お店未設定'}</div>

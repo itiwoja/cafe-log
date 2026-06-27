@@ -91,7 +91,7 @@ html:has(.mask.on),body:has(.mask.on),html:has(#viewer.on),body:has(#viewer.on){
   <div class="score" id="score"></div>
   <div class="scorebar"><i id="scorebar"></i></div>
   <div id="list"></div>
-  <div class="foot">麺を食べて記録すると自動で獲得 ✦</div>
+  <div class="foot">カフェを記録すると自動で獲得 ✦</div>
 </div>
 <script>
 const KEY='cafeLog.v1'
@@ -121,7 +121,7 @@ function section(title,items){
   const e=items.filter(a=>a.earned).length
   return `<div class="group-h">${esc(title)} <span class="grp-n">${e}/${items.length}</span></div>`+items.map(trItem).join('')
 }
-// 総合 → 麺類ごと（各セクションに デビュー/マニア/極み）
+// 総合 → ドリンクごと（各セクションに デビュー/マニア/極み）
 const genres=(window.MENCHO_GENRES||[])
 let html=section('総合', ach.filter(a=>a.group==='総合'))
 genres.forEach(g=>{ html+=section(g, ach.filter(a=>a.id.split(':')[1]===g)) })

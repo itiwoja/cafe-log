@@ -1,0 +1,15 @@
+{
+  "name": "カフェ日記",
+  "short_name": "カフェ日記",
+  "description": "カフェの記録 — コーヒーも抹茶もスイーツも。",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

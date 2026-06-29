@@ -1,48 +1,50 @@
-# カフェ日記 — デザイン方針（Material Design 3 / 麺帳と統一）
+# カフェ日記 — デザイン方針（Apple HIG / iOS × 可愛い）
 
-## 路線：Material Design 3（麺帳とシステム統一・シードで差別化）
-カフェ記録アプリ。**コーヒー/モカ系の暖色シード**（麺帳=ラーメンの橙より茶色寄り・クリーミー）。
-M3で麺帳とUIシステムを揃えつつ、配色でカフェらしさ（ラテ/モカ＋ほんのり可愛い差し色）を出す。
-anti-ai-design 常時併用（素のAndroid量産感を避ける）。font-selection 準拠。
-※機能・データ（localStorage `cafeLog.v1` ＋ 写真IndexedDB `cafechoDB`/`photos`）・全ページ（index/stats/trophy/wiki）・PWAは維持。**見た目をM3へ刷新**。
+## 路線：iOSデザイン（Apple HIG）をベースに「もっと可愛い」
+iOSの作法（Large Title・インセットグループ・SF的システム書体・44pt・ライト/ダーク・マテリアル/blur）に、
+**パステル×クリーム＋丸み＋ふんわり影**の可愛さを重ねる。甘すぎず大人可愛い寄り。
+apple-hig 準拠＋ anti-ai-design（テンプレ感回避）＋ font-selection。
+※機能・データ（localStorage `cafeLog.v1` ＋写真IndexedDB `cafechoDB`/`photos`）・全ページ（index/stats/trophy/wiki）・PWAは維持。**見た目のみ刷新**。
 
-## カラー（M3 26ロール／6グループ・モカ系シード）
-M3ロール構造で light/dark を定義（最小3:1ペア・指定ペアのみ使用・AA確認必須）。
-**Light（目安・要AA確認/調整）**
-- primary `#7E5539`（モカ）/ on-primary `#FFFFFF` / primary-container `#FFDCC2` / on-primary-container `#2D1600`
-- secondary `#9C4458`（ダスティローズ＝可愛い差し色）/ on-secondary `#FFFFFF` / secondary-container `#FFD9DF` / on-secondary-container `#3E0017`
-- tertiary `#6B5D2F`（オリーブ）/ tertiary-container `#F4E3A6` / on-tertiary-container `#211B00`
-- error `#BA1A1A` / error-container `#FFDAD6` / on-error-container `#410002`
-- surface `#FFF8F4`（ラテ）/ surface-container-lowest `#FFFFFF` / -low `#FCF0E8` / -default `#F7EAE0` / -high `#F1E4DA` / -highest `#EBDED4`
-- on-surface `#221A14` / on-surface-variant `#51453B` / outline `#847469` / outline-variant `#D6C3B6`
+## カラー（iOSセマンティック＋可愛いパステル）
+iOSのセマンティック構造（label/secondaryLabel/separator/systemGroupedBackground/elevated）で light/dark を定義。AA必須。
+**Light**
+- アクセント(tint)＝**ストロベリーミルク系ローズ** `#E8729A`（CTA・選択・リンク・★）。サブ差し色＝ピーチ `#FFB59E` / ミント `#9FD8C2`（少量）。
+- 背景(systemGroupedBackground)＝ブラッシュクリーム `#FBF1F1` / カード(elevated)＝`#FFFFFF`。
+- label＝ココアブラウン `#3B2E2C`（純黒回避）/ secondaryLabel `#8A7A77` / separator `rgba(60,40,40,.12)`。
 **Dark**
-- primary `#F3B98C` / on-primary `#48280F` / primary-container `#623E23` / on-primary-container `#FFDCC2`
-- secondary `#FFB2BF` / surface `#19120D` / surface-container `#261D17` / -high `#312720` / on-surface `#EFE0D6` / on-surface-variant `#D6C3B6` / outline `#9F8C80` / error `#FFB4AB`
-> 麺帳(橙)より**茶色・クリーム寄り**で差別化。ローズの差し色で「可愛い」をほんのり。純黒/純白の塗りなし。`prefers-color-scheme`両対応・全ペアAA(本文4.5:1/大文字・非テキスト3:1)。
+- tint `#FF9CB6` / 背景 `#1A1416` / カード `#241B1E` / label `#F2E7E5` / secondaryLabel `#B8A6A3` / separator `rgba(255,235,235,.14)`。
+> 純黒/純白の塗りなし。`prefers-color-scheme`両対応・全ペアAA(本文4.5:1/大文字・非テキスト3:1)。tintは可愛いローズで統一感。
 
-## タイポグラフィ（麺帳と統一：M PLUS 2 ／ font-selection）
-- 全体 **M PLUS 2**（Webフォント・麺帳と統一・軽量モダン）。ウェイト **400/500/700/800**（500=中字, 700=太字, 800=ワードマーク）。`display=swap`・preconnect・自動サブセット。
-- M3 type scale（sp→rem=sp/16）。本文 Body Large(16px)。見出しは800で強調。
-> ※現行の Zen Maru Gothic / Klee One は統一のため M PLUS 2 に置換（可愛い手書きアクセントを少し残したい場合は Klee One を見出し限定で併用可）。
+## タイポグラフィ（iOS Dynamic Type ＋ 丸ゴシックで可愛く）
+- 書体＝**Zen Maru Gothic**（丸ゴシック＝可愛い・高可読、Webフォント・display=swap・preconnect）＋ `-apple-system, system-ui` フォールバック（iOS実機はSF/ヒラギノに近い丸み）。ウェイト 400/500/700/900。
+- iOSテキストスタイルを rem 化：Large Title 34/41・Title1 28/34・Title2 22/28・Headline 17/22(Semibold)・**Body 17/22**・Subhead 15/20・Footnote 13/18・Caption 12/16。本文 **17px(1.0625rem)** 基準。
+- 「カフェ日記」は **Large Title**（左上・大きめ・太め）。Dynamic Type相当の拡大耐性。
 
-## シェイプ / エレベーション / モーション（M3・麺帳と同じ）
-- 角丸: カード Medium12〜Large16／ボタン Full／チップ Small8〜Full／FAB Large16／ボトムシート・ダイアログ Extra-large28(上端)／テキストフィールド Extra-small4。
-- elevation: 影でなく surface-container のトーン差で高さ（level0〜5・FAB level3・hover+1）。
-- motion: easing Standard `cubic-bezier(0.2,0,0,1)`／Emphasized decelerate `cubic-bezier(0.05,0.7,0.1,1)`。duration 選択200/シート400/全画面500ms。state layer hover8/focus10/pressed10%。**ボトムシートはovershoot無し**（下空白の既知不具合回避）。
+## 形・素材・モーション（iOS×可愛い）
+- **角丸を大きめ＆連続的**に（continuous風）：カード/グループ **20〜22**・ボタン/チップ Full(pill)・シート上端 大きめ。可愛さは丸みで出す。
+- **ふんわり影**（iOSは控えめだが可愛さで少し柔らかく）：`0 6px 20px rgba(80,40,50,.08)`（純黒なし）。境界はインセットの薄いseparatorも併用。
+- **インセットグループ**（iOS定番）でカード/設定/フォームをまとめる。
+- マテリアル/blur：ナビバー・シートに軽い `backdrop-filter: blur` （`-webkit-`併記・@supports/reduced-transparencyフォールバック）。
+- モーション：iOSらしい spring/ease（**ただしボトムシートは overshoot 無し**＝下空白の既知不具合回避）・reduced-motion対応。
+- 可愛い小物：☕/♡ 等の控えめモチーフは**アクセント程度**（絵文字をロゴ化しない＝anti-ai）。やり過ぎない。
 
-## コンポーネント（M3パターン）
-- Top app bar（カフェ日記＋検索/設定）／**Extended FAB「＋記録する」**／Filter chips（種類・タグ）／filled 検索／記録カード（写真＋メニュー＋店＋★＋価格＋日付＋タグ）／**Bottom sheet詳細（Extra-large28・overshoot無し）**／filled フォーム／Snackbar。
-- 既存の 2段階スワイプ削除・写真ビューア・実績(trophy)・統計(stats)・wiki も同M3トークンで再スキン。
+## コンポーネント（iOSパターン）
+- **Large Title ナビ**（カフェ日記＋検索/設定アイコン、スクロールで縮小は任意）。
+- **検索フィールド**（iOS角丸グレー）／**フィルタ**（pillチップ or セグメント、選択=tint）。
+- **記録カード**（白・大角丸・ふんわり影・写真＋ドリンク名＋カフェ＋★＋価格＋日付＋タグpill）。インセットで並べる。
+- **詳細＝iOSシート**（上端grabber・大角丸・overshoot無し）／**記録フォーム＝インセットグループ**（iOS入力行）。
+- **「＋記録する」**＝tintの丸ピル（下部に浮かせる or ナビの＋）。Snackbar/トースト。
+- 2段階スワイプ削除・写真ビューア・実績(trophy)・統計(stats)・wiki も iOS×可愛いトークンで再スキン。
 
 ## 維持（不変・厳守）
 - データ: `cafeLog.v1`＋写真IndexedDB（`cafechoDB`/`photos`）・migrate・全フィールド不変。**既存記録・写真がそのまま表示**。
-- 機能: 一覧/検索/フィルタ/記録の追加・編集・削除/写真/バックアップ/設定/実績/統計/wiki/PWA(SW)。
-- 用語はカフェ仕様（「麺」残骸を出さない＝過去に修正済みを踏襲）。`lang="ja"`。
-- overscroll白対策（html背景=surface一致）・文字選択無効（入力欄除く）・背景スクロールロック。
+- 機能: 一覧/検索/フィルタ/追加・編集・削除/写真/バックアップ/設定/実績/統計/wiki/PWA(SW)。カフェ用語（「麺」残骸を出さない）。`lang="ja"`。
+- overscroll白対策（html背景=背景色一致）・文字選択無効（入力欄除く）・背景スクロールロック。
 
 ## 出力前チェック
-- [ ] M3ロールで配色・全ペアAA・light/dark両対応（純黒/純白なし）・麺帳と差別化された茶/クリーム
-- [ ] M PLUS 2(400/500/700/800・swap・preconnect)・M3 type scale・角丸/トーン面色elevation/motion
-- [ ] FAB/AppBar/Chips/Card/BottomSheet/TextField が M3
+- [ ] iOS作法（Large Title・インセットグループ・44pt・ライト/ダーク・マテリアル）に沿う
+- [ ] パステル(ローズtint)＋大角丸＋ふんわり影で「もっと可愛い」、純黒/純白なし・全ペアAA
+- [ ] Zen Maru Gothic(swap/preconnect)＋iOS Dynamic Type相当・本文17px
 - [ ] 既存データ(cafeLog.v1＋写真)読込OK・全機能/全ページ動作
 - [ ] シートovershoot無し・量産感回避(anti-ai)・カフェ用語(麺残骸なし)

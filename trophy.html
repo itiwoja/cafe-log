@@ -6,8 +6,8 @@
 <style id="cjg">html{visibility:hidden}</style>
 <script>if(self===top){document.documentElement.style.visibility='visible'}else{try{top.location=self.location}catch(e){}}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#FFF8F4" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#19120D" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FBF1F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1A1416" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.webmanifest">
@@ -16,84 +16,77 @@
 <title>カフェ日記 — トロフィー</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="achievements.js"></script>
 <style>
 /* ============================================================
-   カフェ日記 トロフィー — Material Design 3 reskin（index.html と同一トークン）
-   獲得=primary、未獲得=低強調。M3 26カラーロール(light/dark)。
+   カフェ日記 トロフィー — iOS (Apple HIG) × もっと可愛い（index.html と同一トークン）
+   獲得=ローズ tint、未獲得=低強調。iOS セマンティック × ローズパステル。
+   フォント: Zen Maru Gothic 先頭 + iOS フォールバック。
    JS・id・class・データキー(cafeLog.v1)は一切変更していない（見た目層のみ）。
    ============================================================ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 :root{
-  --md-primary:#7E5539; --md-on-primary:#FFFFFF;
-  --md-primary-container:#FFDCC2; --md-on-primary-container:#2D1600;
-  --md-secondary:#9C4458; --md-on-secondary:#FFFFFF;
-  --md-secondary-container:#FFD9DF; --md-on-secondary-container:#3E0017;
-  --md-error:#BA1A1A; --md-on-error:#FFFFFF;
-  --md-surface:#FFF8F4; --md-on-surface:#221A14; --md-on-surface-variant:#51453B;
-  --md-surface-container-lowest:#FFFFFF; --md-surface-container-low:#FCF0E8;
-  --md-surface-container:#F7EAE0; --md-surface-container-high:#F1E4DA;
-  --md-surface-container-highest:#EBDED4;
-  --md-outline:#847469; --md-outline-variant:#D6C3B6;
-  --md-star:#9C6B07;
-  --label:var(--md-on-surface);--secondary-label:var(--md-on-surface-variant);
-  --bg:var(--md-surface);--fill:var(--md-surface-container-high);--tint:var(--md-primary);
-  --focus:var(--md-primary);
-  --font-sys:"M PLUS 2","Hiragino Sans","Hiragino Kaku Gothic ProN",system-ui,-apple-system,sans-serif;
-  --r-xs:4px;--r-sm:8px;--r-md:12px;--r-lg:16px;--r-full:999px;
-  --ease-standard:cubic-bezier(.2,0,0,1);--ease-accelerate:cubic-bezier(.3,0,.8,.15);--ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --tint:#CF3A6E; --on-tint:#FFFFFF;
+  --tint-weak:#FDE3EC; --on-tint-weak:#7A2342;
+  --label:#3B2E2C; --secondary-label:#776663; --tertiary-label:#8A7C79;
+  --bg:#FBF1F1; --bg-elevated:#FFFFFF;
+  --fill:#F4E7E7; --fill-2:#FBEFF0;
+  --separator:rgba(60,40,40,.12); --separator-weak:rgba(60,40,40,.08);
+  --star:#C87411; --focus:#C2557C;
+  --shadow-card:0 6px 20px rgba(80,40,50,.08);
+  --font-sys:"Zen Maru Gothic",-apple-system,system-ui,"Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
+  --r-xs:10px;--r-sm:14px;--r-md:18px;--r-lg:22px;--r-full:999px;
+  --dur-fast:200ms;
+  --ease-standard:cubic-bezier(.2,0,0,1);--ease-accelerate:cubic-bezier(.4,0,1,1);
+  --ease-decelerate:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.4,.64,1);
 }
 @media (prefers-color-scheme:dark){
   :root{
-    --md-primary:#F3B98C; --md-on-primary:#48280F;
-    --md-primary-container:#623E23; --md-on-primary-container:#FFDCC2;
-    --md-secondary:#FFB2BF; --md-on-secondary:#5E1129;
-    --md-secondary-container:#7C2D40; --md-on-secondary-container:#FFD9DF;
-    --md-error:#FFB4AB; --md-on-error:#690005;
-    --md-surface:#19120D; --md-on-surface:#EFE0D6; --md-on-surface-variant:#D6C3B6;
-    --md-surface-container-lowest:#130C08; --md-surface-container-low:#221A14;
-    --md-surface-container:#261D17; --md-surface-container-high:#312720;
-    --md-surface-container-highest:#3D322A;
-    --md-outline:#9F8C80; --md-outline-variant:#51453B;
-    --md-star:#F4C95D;
+    --tint:#FF9CB6; --on-tint:#3A0F1E;
+    --tint-weak:#4A2330; --on-tint-weak:#FFD7E3;
+    --label:#F2E7E5; --secondary-label:#B8A6A3; --tertiary-label:#90807D;
+    --bg:#1A1416; --bg-elevated:#241B1E;
+    --fill:#2C2125; --fill-2:#271D21;
+    --separator:rgba(255,235,235,.14); --separator-weak:rgba(255,235,235,.08);
+    --star:#FFC65C;
   }
 }
 html,body{height:100%;}
 html{background-color:var(--bg);}
 body{font-family:var(--font-sys);color:var(--label);background-color:var(--bg);
-  min-height:100dvh;-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.5;letter-spacing:.01em;}
+  min-height:100dvh;-webkit-font-smoothing:antialiased;font-size:17px;line-height:1.5;letter-spacing:.01em;}
 .wrap{max-width:560px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 14px) 20px calc(env(safe-area-inset-bottom) + 80px);}
-:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px;}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:8px;}
 
-.back{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--md-on-surface-variant);
-  text-decoration:none;margin-bottom:18px;min-height:44px;transition:color .2s var(--ease-standard);}
-.back:hover{color:var(--md-primary);}
-.title{font-size:30px;line-height:38px;font-weight:800;letter-spacing:-.01em;color:var(--md-on-surface);}
-.score{font-size:14px;color:var(--md-on-surface-variant);margin-top:6px;font-weight:500;letter-spacing:.2px;font-variant-numeric:tabular-nums;}
-.scorebar{height:8px;border-radius:var(--r-full);background:var(--md-surface-container-high);overflow:hidden;margin:12px 0 4px;}
-.scorebar i{display:block;height:100%;background:var(--md-primary);border-radius:var(--r-full);}
-/* M3 group 見出し = secondary-container ピル（ローズ差し色） */
-.group-h{font-size:13px;font-weight:700;letter-spacing:.2px;color:var(--md-on-secondary-container);background:var(--md-secondary-container);
-  display:inline-block;padding:6px 14px;border-radius:var(--r-full);margin:28px 0 10px;}
-.group-h .grp-n{font-weight:600;opacity:.75;margin-left:4px;font-variant-numeric:tabular-nums;}
-/* M3 list item（獲得=on / 未獲得=低強調） */
-.tr{display:flex;align-items:center;gap:13px;padding:14px 0;border-bottom:1px solid var(--md-outline-variant);}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:700;color:var(--tint);
+  text-decoration:none;margin-bottom:18px;min-height:44px;transition:filter .2s var(--ease-standard);}
+.back:hover{filter:brightness(.95);}
+.title{font-size:34px;line-height:41px;font-weight:900;letter-spacing:.005em;color:var(--label);}
+.score{font-size:14px;color:var(--secondary-label);margin-top:6px;font-weight:500;letter-spacing:.2px;font-variant-numeric:tabular-nums;}
+.scorebar{height:8px;border-radius:var(--r-full);background:var(--fill);overflow:hidden;margin:12px 0 4px;}
+.scorebar i{display:block;height:100%;background:var(--tint);border-radius:var(--r-full);}
+/* group 見出し = 淡ローズ pill */
+.group-h{font-size:13px;font-weight:700;letter-spacing:.2px;color:var(--on-tint-weak);background:var(--tint-weak);
+  display:inline-block;padding:7px 16px;border-radius:var(--r-full);margin:28px 0 10px;}
+.group-h .grp-n{font-weight:500;opacity:.75;margin-left:4px;font-variant-numeric:tabular-nums;}
+/* list item（獲得=on / 未獲得=低強調） */
+.tr{display:flex;align-items:center;gap:13px;padding:14px 0;border-bottom:1px solid var(--separator);}
 .tr:last-child{border-bottom:none;}
-.tr-badge{width:44px;height:44px;flex-shrink:0;border-radius:var(--r-md);display:flex;align-items:center;
-  justify-content:center;font-size:18px;font-weight:700;border:1.5px solid var(--md-outline-variant);color:var(--md-outline);background:var(--md-surface-container-low);}
-.tr.on .tr-badge{background:var(--md-primary);color:var(--md-on-primary);border-color:transparent;}
+.tr-badge{width:46px;height:46px;flex-shrink:0;border-radius:var(--r-md);display:flex;align-items:center;
+  justify-content:center;font-size:18px;font-weight:700;border:1.5px solid var(--separator);color:var(--tertiary-label);background:var(--fill);}
+.tr.on .tr-badge{background:var(--tint);color:var(--on-tint);border-color:transparent;box-shadow:var(--shadow-card);}
 .tr-body{flex:1;min-width:0;}
-.tr-title{font-size:16px;font-weight:600;color:var(--md-on-surface-variant);}
-.tr.on .tr-title{color:var(--md-on-surface);}
-.tr-desc{font-size:13px;color:var(--md-on-surface-variant);margin-top:1px;}
-.tr-prog{height:5px;border-radius:var(--r-full);background:var(--md-surface-container-high);overflow:hidden;margin-top:7px;}
-.tr-prog i{display:block;height:100%;background:var(--md-outline);border-radius:var(--r-full);}
-.tr.on .tr-prog i{background:var(--md-primary);}
-.tr-have{flex-shrink:0;font-size:13px;font-weight:600;color:var(--md-on-surface-variant);min-width:48px;text-align:right;font-variant-numeric:tabular-nums;}
-.tr.on .tr-have{color:var(--md-primary);}
-.foot{margin-top:30px;text-align:center;font-size:13px;color:var(--md-on-surface-variant);line-height:1.7;}
-.empty-note{font-size:14px;color:var(--md-on-surface-variant);text-align:center;padding:8px 0 4px;letter-spacing:.2px;}
+.tr-title{font-size:16px;font-weight:700;color:var(--secondary-label);}
+.tr.on .tr-title{color:var(--label);}
+.tr-desc{font-size:13px;color:var(--secondary-label);margin-top:1px;}
+.tr-prog{height:5px;border-radius:var(--r-full);background:var(--fill);overflow:hidden;margin-top:7px;}
+.tr-prog i{display:block;height:100%;background:var(--tertiary-label);border-radius:var(--r-full);}
+.tr.on .tr-prog i{background:var(--tint);}
+.tr-have{flex-shrink:0;font-size:13px;font-weight:700;color:var(--secondary-label);min-width:48px;text-align:right;font-variant-numeric:tabular-nums;}
+.tr.on .tr-have{color:var(--tint);}
+.foot{margin-top:30px;text-align:center;font-size:13px;color:var(--secondary-label);line-height:1.7;}
+.empty-note{font-size:14px;color:var(--secondary-label);text-align:center;padding:8px 0 4px;letter-spacing:.2px;}
 
 /* アプリ的挙動: 長押しの文字選択を無効 / プルto更新を無効 */
 html,body{overscroll-behavior:none;}
@@ -103,7 +96,7 @@ input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:tex
 /* ページ間のなめらか遷移（クロスドキュメント View Transitions・未対応は通常遷移） */
 @view-transition{ navigation: auto; }
 ::view-transition-old(root){ animation: vtOut 220ms var(--ease-accelerate) both; }
-::view-transition-new(root){ animation: vtIn 360ms var(--ease-spring) both; }
+::view-transition-new(root){ animation: vtIn 360ms var(--ease-decelerate) both; }
 @keyframes vtOut{ to{opacity:0;transform:translateY(-10px) scale(.97);} }
 @keyframes vtIn{ from{opacity:0;transform:translateY(16px) scale(1.02);} }
 @media (prefers-reduced-motion: reduce){

@@ -1,6 +1,6 @@
 // カフェ帳 Service Worker — オフライン対応
 // データ(localStorage/IndexedDB)には触れない。アプリ本体(HTML/CSS/フォント)のみキャッシュ。
-const CACHE = 'cafecho-v16'
+const CACHE = 'cafecho-v17'
 const ASSETS = ['./','index.html','stats.html','wiki.html','trophy.html','achievements.js','manifest.webmanifest','icon.svg']
 
 self.addEventListener('install', e => {
